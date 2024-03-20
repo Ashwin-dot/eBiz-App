@@ -12,8 +12,12 @@ import {
   Heading,
   useMediaQuery,
   Link,
+  Input,
+  IconButton,
+  InputRightElement,
+  InputGroup,
 } from "@chakra-ui/react";
-import { HamburgerIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, ChevronDownIcon, Search2Icon } from "@chakra-ui/icons";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const links = [
@@ -39,25 +43,51 @@ const NavBar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Box>
-        <HStack spacing={3}>
-          <Box>
-            <Box display="flex" alignItems="center">
-              <Heading size="md" onClick={() => navigate("/")} cursor="pointer">
-                eBiz
-              </Heading>
-            </Box>
+      <HStack spacing={3}>
+        <Box
+          mb={2}
+          display="flex"
+          justifyContent="space-around"
+          alignItems="center"
+          borderBottomColor="gray.200"
+          boxShadow="dark-lg"
+          p="4"
+          width="100%"
+          rounded="md"
+          bg="white"
+        >
+          <Box display="flex" alignItems="center">
+            <Heading
+              color={"primary.1"}
+              size="xl"
+              onClick={() => navigate("/")}
+              cursor="pointer"
+            >
+              eBiz
+            </Heading>
+          </Box>
+          <Box display="flex" alignItems="center">
+            <InputGroup width={isSmallerThan768 ? "{300}" : "lg"}>
+              <Input placeholder="search product" variant="filled" size="md" />
+
+              <InputRightElement pointerEvents="none">
+                <IconButton
+                  colorScheme="white"
+                  color={"primary.1"}
+                  icon={<Search2Icon />}
+                />
+              </InputRightElement>
+            </InputGroup>
           </Box>
           <Box
             display="flex"
             alignItems="center"
             gap="50px"
             justifyContent="space-between"
-            w={isSmallerThan768 ? "100%" : "auto"}
             mt="5px"
           >
             {isSmallerThan768 ? (
-              <HamburgerIcon links={links} />
+              <HamburgerIcon links={links} display="flex" gap="20px" />
             ) : (
               <Box
                 letterSpacing="0.75px"
@@ -81,7 +111,6 @@ const NavBar = () => {
                   <MenuButton
                     as={Link}
                     _hover={{ color: "primary.9" }}
-                    
                     onMouseEnter={onOpen}
                     onClick={onOpen}
                   >
@@ -99,8 +128,8 @@ const NavBar = () => {
               </Box>
             )}
           </Box>
-        </HStack>
-      </Box>
+        </Box>
+      </HStack>
     </>
   );
 };
