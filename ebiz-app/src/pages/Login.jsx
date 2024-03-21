@@ -9,21 +9,16 @@ import {
   InputGroup,
   Checkbox,
   Button,
-  Image,
   InputRightElement,
   useMediaQuery,
 } from "@chakra-ui/react";
 
-const Signup = () => {
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [reshowPassword, resetShowPassword] = useState(false);
   const [isSmallerthan454] = useMediaQuery("(max-width:454px)");
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-  };
-  const retogglePasswordVisibility = () => {
-    resetShowPassword(!reshowPassword);
   };
 
   return (
@@ -38,13 +33,12 @@ const Signup = () => {
       backgroundRepeat="no-repeat"
     >
       <Box
+        bg="primary.2"
         w={isSmallerthan454 ? "300px" : "500px"}
-        paddingLeft={isSmallerthan454 ? "30px" : "4px"}
+        p="4"
         shadow="lg"
         borderRadius="10px"
         backgroundColor="rgba(255, 255, 255, 0.9)"
-        px="20px"
-        pt="20px"
       >
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <Heading>eBiz</Heading>
@@ -54,10 +48,7 @@ const Signup = () => {
           </Box>
         </Box>
         <Box pt="20px">
-          <Text>Sign up to continue to our application</Text>
-          <InputGroup pt="10px">
-            <Input variant="outline" placeholder="Enter your full name" />
-          </InputGroup>
+          <Text>Sign in to continue to our application</Text>
           <InputGroup pt="10px">
             <Input variant="outline" placeholder="Enter your email" />
             <InputRightElement mt="9px">
@@ -74,29 +65,26 @@ const Signup = () => {
               {showPassword ? <ViewOffIcon /> : <ViewIcon />}
             </InputRightElement>
           </InputGroup>
-          <InputGroup pt="10px">
-            <Input
-              variant="outline"
-              type={reshowPassword ? "text" : "password"}
-              placeholder="Re-enter your password"
-            />
-            <InputRightElement onClick={retogglePasswordVisibility} mt="9px">
-              {reshowPassword ? <ViewOffIcon /> : <ViewIcon />}
-            </InputRightElement>
-          </InputGroup>
         </Box>
 
         <Box textAlign="center" pt="10px">
           <Button colorScheme="cyan" color="primary.2">
-            Sign up
+            Sign in
           </Button>
         </Box>
-        <Box pt="10px" textAlign="center" pb="20px">
+        <Box display="flex" justifyContent="space-between" pt="5px">
+          <Box display="flex" gap="5px" alignItems="center">
+            <Checkbox border="1px" h="fit-content" />
+            <Text>Remember Me</Text>
+          </Box>
+          <Box>Forgot Password ?</Box>
+        </Box>
+        <Box textAlign="center" pt="5px">
           <Text>
-            Already have an account?
-            <Link href="/login">
+            Don't have an account?{" "}
+            <Link href="/signup">
               {" "}
-              <b>Login</b>
+              <b>Sign up</b>{" "}
             </Link>
           </Text>
         </Box>
@@ -105,4 +93,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
