@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 
 const Header = () => {
   return (
@@ -9,8 +9,9 @@ const Header = () => {
       alignItems="center"
       p={4}
       bg="primary.1"
+      color="primary.2"
     >
-      <Text fontSize="sm">eBiz is an ecoomerce Website</Text>
+      <Heading size="md">e-Commerce for everything</Heading>
     </Box>
   );
 };
