@@ -13,11 +13,11 @@ import {
 } from "@chakra-ui/react";
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
-import { LiaHomeSolid } from "react-icons/lia";
 import { AiFillCustomerService } from "react-icons/ai";
-import { GiFurShirt } from "react-icons/gi";
 import Footer from "../components/Footer";
+import { GiFurShirt } from "react-icons/gi";
 import { BsMagic } from "react-icons/bs";
+import { LiaHomeSolid } from "react-icons/lia";
 import { BsDribbble } from "react-icons/bs";
 import { BsSmartwatch } from "react-icons/bs";
 import { BsPcDisplayHorizontal } from "react-icons/bs";
@@ -100,7 +100,7 @@ const Dashboard = () => {
         <Box maxW="1200px" m="0 auto">
           <Card boxShadow="md" display="flex">
             <SimpleGrid
-              columns={[2, 3, 4]}
+              columns={[1, 2, 3, 4]}
               gap="2px"
               pt="15px"
               pb="15px"
@@ -121,7 +121,7 @@ const Dashboard = () => {
             Top Products
           </Heading>
           <Box display="flex" gap="20px" pt="20px">
-            <SimpleGrid columns={[3, 4, 5]} gap="20px">
+            <SimpleGrid columns={[2, 3, 4, 5]} gap="20px">
               {electronicdevices.map((eproduct, key) => (
                 <Card maxW="250px" boxShadow="md">
                   <CardBody pl="10px" pt="0px" pr="10px" pb="5px">
@@ -147,7 +147,7 @@ const Dashboard = () => {
             Just For You
           </Heading>
           <Box display="flex" gap="20px" pt="20px">
-            <SimpleGrid columns={[3, 4, 5]} gap="20px">
+            <SimpleGrid columns={[2, 3, 4, 5]} gap="20px">
               {electronicdevices.map((eproduct, key) => (
                 <Card maxW="250px" boxShadow="md">
                   <CardBody pl="10px" pt="0px" pr="10px" pb="5px">
