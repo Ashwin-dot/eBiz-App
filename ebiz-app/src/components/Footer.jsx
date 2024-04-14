@@ -16,12 +16,12 @@ const Footer = () => {
           pb="20px"
         >
           <Box>
-            <Text as="b">Popular Categories</Text>
+            <Text as="b">Categories</Text>
             <Box gap="10px" pt="5px">
-              <Text>Electronic Devices</Text>
-              <Text>Fashion</Text>
-              <Text>Shoes</Text>
-              <Text>Watches & Accessories</Text>
+              <Text>Land</Text>
+              <Text>Building</Text>
+              <Text>Factory</Text>
+              <Text>Residential</Text>
             </Box>
           </Box>
           <Box>

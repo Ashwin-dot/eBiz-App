@@ -26,6 +26,15 @@ import { BsSmartwatch } from "react-icons/bs";
 import { BsPcDisplayHorizontal } from "react-icons/bs";
 import { GiSonicShoes } from "react-icons/gi";
 import { AiFillCustomerService } from "react-icons/ai";
+import { AiOutlineUser } from "react-icons/ai";
+import { BiSolidBusiness } from "react-icons/bi";
+import { LiaProductHunt } from "react-icons/lia";
+import { MdOutlineViewComfyAlt } from "react-icons/md";
+import { MdCall } from "react-icons/md";
+import { MdMessage } from "react-icons/md";
+import { MdHistory } from "react-icons/md";
+import { GoCommentDiscussion } from "react-icons/go";
+import { MdLogout } from "react-icons/md";
 
 const links = [
   {
@@ -50,39 +59,80 @@ const NavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isSmallerThan768] = useMediaQuery("(max-width: 768px)");
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isCategoriesOpen,
+    onOpen: onCategoriesOpen,
+    onClose: onCategoriesClose,
+  } = useDisclosure();
+  const {
+    isOpen: isProfileOpen,
+    onOpen: onProfileOpen,
+    onClose: onProfileClose,
+  } = useDisclosure();
   const categories = [
     {
-      title: "Furniture & Lightning",
+      title: "Land",
       icon: <LiaHomeSolid />,
     },
     {
-      title: "Electronic Devices",
+      title: "Building",
       icon: <AiFillCustomerService />,
     },
     {
-      title: "Fashion",
+      title: "Factory",
       icon: <GiFurShirt />,
     },
     {
-      title: "Health & Beauty",
+      title: "Residential",
       icon: <BsMagic />,
     },
+  ];
+
+  const profilesubmenu = [
     {
-      title: "Sports & Outdoor",
-      icon: <BsDribbble />,
+      title: "My Profile",
+      icon: <AiOutlineUser />,
+      to: "/myprofile",
     },
     {
-      title: "Watches & Accessories",
-      icon: <BsSmartwatch />,
+      title: "My Business",
+      to: "/mybusiness",
+      icon: <BiSolidBusiness />,
     },
     {
-      title: "Computer, Office & Education",
-      icon: <BsPcDisplayHorizontal />,
+      title: "Add Product",
+      to: "/addproduct",
+      icon: <LiaProductHunt />,
     },
     {
-      title: "Shoes",
-      icon: <GiSonicShoes />,
+      title: "View Product",
+      to: "/myprofile",
+      icon: <MdOutlineViewComfyAlt />,
+    },
+    {
+      title: "Calls",
+      to: "/calls",
+      icon: <MdCall />,
+    },
+    {
+      title: "Message",
+      to: "/message",
+      icon: <MdMessage />,
+    },
+    {
+      title: "Buy History",
+      to: "/buyhistory",
+      icon: <MdHistory />,
+    },
+    {
+      title: "Comments",
+      to: "/comments",
+      icon: <GoCommentDiscussion />,
+    },
+    {
+      title: "Logout Business",
+      to: "/logoutbusiness",
+      icon: <MdLogout />,
     },
   ];
 
@@ -140,7 +190,8 @@ const NavBar = () => {
             >
               {links.map(
                 (link, key) =>
-                  link.title !== "All Categories" && (
+                  link.title !== "All Categories" &&
+                  link.title !== "Profile" && (
                     <React.Fragment key={link.to}>
                       <Link
                         key={link.to}
@@ -163,7 +214,11 @@ const NavBar = () => {
                   )
               )}
 
-              <Menu isOpen={isOpen} onClose={onClose} placement="bottom-start">
+              <Menu
+                isOpen={isCategoriesOpen}
+                onClose={onCategoriesClose}
+                placement="bottom-start"
+              >
                 <MenuButton
                   as={Link}
                   color={
@@ -171,15 +226,47 @@ const NavBar = () => {
                   }
                   _hover={{ color: "primary.9" }}
                   px={0}
-                  onMouseEnter={onOpen}
+                  onMouseEnter={onCategoriesOpen}
                 >
                   {links.find((link) => link.title === "All Categories").title}
                   <ChevronDownIcon />
                 </MenuButton>
-                <MenuList onMouseLeave={onClose}>
+                <MenuList onMouseLeave={onCategoriesClose}>
                   {categories.map((category) => (
                     <MenuItem key={category.title} icon={category.icon}>
                       {category.title}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </Menu>
+
+              <Menu
+                isOpen={isProfileOpen}
+                onClose={onProfileClose}
+                placement="bottom-start"
+              >
+                <MenuButton
+                  as={Link}
+                  color={
+                    location.pathname === "/profile" ? "primary.14" : "black"
+                  }
+                  _hover={{ color: "primary.9" }}
+                  px={0}
+                  onMouseOver={onProfileOpen}
+                >
+                  {profilesubmenu.find((profile) => profile.title === "Profile")
+                    ?.title || "Profile"}
+
+                  <ChevronDownIcon />
+                </MenuButton>
+                <MenuList onMouseLeave={onProfileClose}>
+                  {profilesubmenu.map((profilemenu) => (
+                    <MenuItem
+                      key={profilemenu.title}
+                      icon={profilemenu.icon}
+                      onClick={() => navigate(profilemenu.to)}
+                    >
+                      {profilemenu.title}
                     </MenuItem>
                   ))}
                 </MenuList>

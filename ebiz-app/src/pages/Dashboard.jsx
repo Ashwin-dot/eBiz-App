@@ -15,50 +15,8 @@ import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import { AiFillCustomerService } from "react-icons/ai";
 import Footer from "../components/Footer";
-import { GiFurShirt } from "react-icons/gi";
-import { BsMagic } from "react-icons/bs";
-import { LiaHomeSolid } from "react-icons/lia";
-import { BsDribbble } from "react-icons/bs";
-import { BsSmartwatch } from "react-icons/bs";
-import { BsPcDisplayHorizontal } from "react-icons/bs";
-import { GiSonicShoes } from "react-icons/gi";
 
 const Dashboard = () => {
-  const categories = [
-    {
-      title: "Furniture & Lightning",
-      icon: <LiaHomeSolid />,
-    },
-    {
-      title: "Electronic Devices",
-      icon: <AiFillCustomerService />,
-    },
-    {
-      title: "Fashion",
-      icon: <GiFurShirt />,
-    },
-    {
-      title: "Health & Beauty",
-      icon: <BsMagic />,
-    },
-    {
-      title: "Sports & Outdoor",
-      icon: <BsDribbble />,
-    },
-    {
-      title: "Watches & Accessories",
-      icon: <BsSmartwatch />,
-    },
-    {
-      title: "Computer, Office & Education",
-      icon: <BsPcDisplayHorizontal />,
-    },
-    {
-      title: "Shoes",
-      icon: <GiSonicShoes />,
-    },
-  ];
-
   const electronicdevices = [
     {
       src: "./Electronic/redmi.jpg",
@@ -98,27 +56,8 @@ const Dashboard = () => {
       <NavBar />
       <Box>
         <Box maxW="1200px" m="0 auto">
-          <Card boxShadow="md" display="flex">
-            <SimpleGrid
-              columns={[1, 2, 3, 4]}
-              gap="2px"
-              pt="15px"
-              pb="15px"
-              pl="15px"
-            >
-              {categories.map((category) => (
-                <Box display="flex" pl="15px">
-                  <Box pt="5px" pr="5px">
-                    {category.icon}
-                  </Box>
-                  <Link>{category.title}</Link>
-                </Box>
-              ))}
-            </SimpleGrid>
-          </Card>
-
           <Heading size="md" pt="15px">
-            Top Products
+            Latest Business and Offers
           </Heading>
           <Box display="flex" gap="20px" pt="20px">
             <SimpleGrid columns={[2, 3, 4, 5]} gap="20px">
