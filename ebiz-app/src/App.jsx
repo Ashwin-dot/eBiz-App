@@ -15,7 +15,7 @@ function App() {
         <Route path="/aboutus" element={<Aboutus />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/product" element={<CommonViewProduct />} />
+        <Route path="/product/:id" element={<CommonViewProduct />} />
         <Route path="/myprofile" element={<MyProfile />} />
         <Route path="/mybusiness" element={<MyBusiness />} />
       </Routes>

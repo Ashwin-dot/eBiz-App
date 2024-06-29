@@ -1,108 +1,88 @@
-import { useState } from "react";
-import { EmailIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import React from 'react';
+import { useState } from 'react';
 import {
   Box,
-  Heading,
-  Link,
-  Text,
-  Input,
-  InputGroup,
-  Checkbox,
   Button,
-  Image,
-  InputRightElement,
-  useMediaQuery,
-} from "@chakra-ui/react";
+  FormControl,
+  FormLabel,
+  Input,
+  Stack,
+  Heading,
+  Text,
+  useColorModeValue,
+  VStack,
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
-const Signup = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [reshowPassword, resetShowPassword] = useState(false);
-  const [isSmallerthan454] = useMediaQuery("(max-width:454px)");
+const SignupForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [fullname, setFullname] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-  const retogglePasswordVisibility = () => {
-    resetShowPassword(!reshowPassword);
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(email, password, fullname, confirmPassword);
+  }
 
   return (
     <Box
+      minH="100vh"
       display="flex"
-      justifyContent="center"
       alignItems="center"
-      height="100vh"
-      backgroundImage="url(./Signup/building.jpg)"
-      backgroundSize="cover"
-      backgroundPosition="center"
-      backgroundRepeat="no-repeat"
+      justifyContent="center"
+      bg={useColorModeValue('gray.50', 'gray.800')}
     >
       <Box
-        w={isSmallerthan454 ? "300px" : "500px"}
-        paddingLeft={isSmallerthan454 ? "30px" : "4px"}
-        shadow="lg"
-        borderRadius="10px"
-        backgroundColor="rgba(255, 255, 255, 0.9)"
-        px="20px"
-        pt="20px"
+        maxW="md"
+        w="full"
+        bg={useColorModeValue('white', 'gray.700')}
+        boxShadow="xl"
+        rounded="lg"
+        p={6}
       >
-        <Box display="flex" alignItems="center" justifyContent="space-between">
-          <Heading>eBiz</Heading>
-          <Box display="flex" gap="15px">
-            <Link href="/signup">Sign up</Link>
-            <Link href="/login">Login</Link>
-          </Box>
-        </Box>
-        <Box pt="20px">
-          <Text>Sign up to continue to our application</Text>
-          <InputGroup pt="10px">
-            <Input variant="outline" placeholder="Enter your full name" />
-          </InputGroup>
-          <InputGroup pt="10px">
-            <Input variant="outline" placeholder="Enter your email" />
-            <InputRightElement mt="9px">
-              <EmailIcon />
-            </InputRightElement>
-          </InputGroup>
-          <InputGroup pt="10px">
-            <Input
-              variant="outline"
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
-            />
-            <InputRightElement onClick={togglePasswordVisibility} mt="9px">
-              {showPassword ? <ViewOffIcon /> : <ViewIcon />}
-            </InputRightElement>
-          </InputGroup>
-          <InputGroup pt="10px">
-            <Input
-              variant="outline"
-              type={reshowPassword ? "text" : "password"}
-              placeholder="Re-enter your password"
-            />
-            <InputRightElement onClick={retogglePasswordVisibility} mt="9px">
-              {reshowPassword ? <ViewOffIcon /> : <ViewIcon />}
-            </InputRightElement>
-          </InputGroup>
-        </Box>
-
-        <Box textAlign="center" pt="10px">
-          <Button colorScheme="cyan" color="primary.2">
-            Sign up
-          </Button>
-        </Box>
-        <Box pt="10px" textAlign="center" pb="20px">
-          <Text>
-            Already have an account?
-            <Link href="/login">
-              {" "}
-              <b>Login</b>
-            </Link>
-          </Text>
-        </Box>
+        <VStack spacing={6}>
+          <Heading as="h1" size="xl" textAlign="center">
+            <Link to="/" color="blue.400">eBiz</Link>
+          </Heading>
+          <Stack spacing={4} w="full">
+            <Heading fontSize="2xl">Create a new account</Heading>
+            <FormControl id="fullname">
+              <FormLabel>Full Name</FormLabel>
+              <Input type="text" value={fullname} onChange={(e) => setFullname(e.target.value)} />
+            </FormControl>
+            <FormControl id="email">
+              <FormLabel>Email address</FormLabel>
+              <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </FormControl>
+            <FormControl id="password">
+              <FormLabel>Password</FormLabel>
+              <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </FormControl>
+            <FormControl id="confirm-password">
+              <FormLabel>Confirm Password</FormLabel>
+              <Input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+            </FormControl>
+            <Stack spacing={6}>
+              <Button
+                bg="blue.400"
+                color="white"
+                _hover={{
+                  bg: 'blue.500',
+                }}
+                onClick={handleSubmit}
+              >
+                Sign up
+              </Button>
+              <Text align="center">
+                Already have an account? <Link to="/login">Sign in</Link>
+              </Text>
+            </Stack>
+          </Stack>
+        </VStack>
       </Box>
     </Box>
   );
 };
 
-export default Signup;
+export default SignupForm;
