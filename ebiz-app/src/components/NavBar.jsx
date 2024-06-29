@@ -55,7 +55,7 @@ const links = [
   },
 ];
 
-const NavBar = () => {
+const NavBar = ({ search, setSearch }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isSmallerThan768] = useMediaQuery("(max-width: 768px)");
@@ -162,7 +162,7 @@ const NavBar = () => {
         </Box>
         <Box display="flex" alignItems="center">
           <InputGroup width={isSmallerThan768 ? "300" : "lg"}>
-            <Input placeholder="Search Products" variant="filled" size="md" />
+            <Input placeholder="Search Products" variant="filled" size="md" value={search} onChange={(e) => setSearch(e.target.value)} />
             <InputRightElement pointerEvents="none">
               <IconButton
                 colorScheme="white"
