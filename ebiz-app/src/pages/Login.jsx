@@ -1,96 +1,78 @@
-import { useState } from "react";
-import { EmailIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import React from 'react';
+import { useState } from 'react';
 import {
   Box,
-  Heading,
-  Link,
-  Text,
-  Input,
-  InputGroup,
-  Checkbox,
   Button,
-  InputRightElement,
-  useMediaQuery,
-} from "@chakra-ui/react";
+  FormControl,
+  FormLabel,
+  Input,
+  Stack,
+  Heading,
+  Text,
+  useColorModeValue,
+  VStack,
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
-const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [isSmallerthan454] = useMediaQuery("(max-width:454px)");
+const LoginForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(email, password);
+  }
 
   return (
     <Box
+      minH="100vh"
       display="flex"
-      justifyContent="center"
       alignItems="center"
-      height="100vh"
-      backgroundImage="url(./Signup/building.jpg)"
-      backgroundSize="cover"
-      backgroundPosition="center"
-      backgroundRepeat="no-repeat"
+      justifyContent="center"
+      bg={useColorModeValue('gray.50', 'gray.800')}
     >
       <Box
-        bg="primary.2"
-        w={isSmallerthan454 ? "300px" : "500px"}
-        p="4"
-        shadow="lg"
-        borderRadius="10px"
-        backgroundColor="rgba(255, 255, 255, 0.9)"
+        maxW="md"
+        w="full"
+        bg={useColorModeValue('white', 'gray.700')}
+        boxShadow="xl"
+        rounded="lg"
+        p={6}
       >
-        <Box display="flex" alignItems="center" justifyContent="space-between">
-          <Heading>eBiz</Heading>
-          <Box display="flex" gap="15px">
-            <Link href="/signup">Sign up</Link>
-            <Link href="/login">Login</Link>
-          </Box>
-        </Box>
-        <Box pt="20px">
-          <Text>Sign in to continue to our application</Text>
-          <InputGroup pt="10px">
-            <Input variant="outline" placeholder="Enter your email" />
-            <InputRightElement mt="9px">
-              <EmailIcon />
-            </InputRightElement>
-          </InputGroup>
-          <InputGroup pt="10px">
-            <Input
-              variant="outline"
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
-            />
-            <InputRightElement onClick={togglePasswordVisibility} mt="9px">
-              {showPassword ? <ViewOffIcon /> : <ViewIcon />}
-            </InputRightElement>
-          </InputGroup>
-        </Box>
-
-        <Box textAlign="center" pt="10px">
-          <Button colorScheme="cyan" color="primary.2">
-            Sign in
-          </Button>
-        </Box>
-        <Box display="flex" justifyContent="space-between" pt="5px">
-          <Box display="flex" gap="5px" alignItems="center">
-            <Checkbox border="1px" h="fit-content" />
-            <Text>Remember Me</Text>
-          </Box>
-          <Box>Forgot Password ?</Box>
-        </Box>
-        <Box textAlign="center" pt="5px">
-          <Text>
-            Don't have an account?{" "}
-            <Link href="/signup">
-              {" "}
-              <b>Sign up</b>{" "}
-            </Link>
-          </Text>
-        </Box>
+        <VStack spacing={6}>
+          <Heading as="h1" size="xl" textAlign="center">
+            <Link to="/" color="blue.400">eBiz</Link>
+          </Heading>
+          <Stack spacing={4} w="full">
+            <Heading fontSize="2xl">Login to your account</Heading>
+            <FormControl id="email">
+              <FormLabel>Email address</FormLabel>
+              <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </FormControl>
+            <FormControl id="password">
+              <FormLabel>Password</FormLabel>
+              <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </FormControl>
+            <Stack spacing={6}>
+              <Button
+                bg="blue.400"
+                color="white"
+                _hover={{
+                  bg: 'blue.500',
+                }}
+                onClick={handleSubmit}
+              >
+                Sign in
+              </Button>
+              <Text align="center">
+                Don't have an account? <Link to="/signup" color="blue.400">Sign up</Link>
+              </Text>
+            </Stack>
+          </Stack>
+        </VStack>
       </Box>
     </Box>
   );
 };
 
-export default Login;
+export default LoginForm;
